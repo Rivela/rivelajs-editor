@@ -1,6 +1,6 @@
 <template>
   <div id="editor">
-    <EdCanvas ref="canvas"></EdCanvas>
+    <EdCanvas :charts="charts"></EdCanvas>
     <EdSidebar v-show="showSidebar"></EdSidebar>
   </div>
 </template>
@@ -12,14 +12,12 @@
   import EdSidebar from './EdSidebar/component.vue'
 
   export default {
+    props:{
+      charts:Array
+    },
     data(){
       return{
         showSidebar:true
-      }
-    },
-    methods:{
-      addChart(item){
-        this.$refs.canvas.addChart(item)
       }
     },
     components:{

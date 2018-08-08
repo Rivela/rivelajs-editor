@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <EdHeader @addchart="onAddChart"></EdHeader>
-    <EdEditor ref="editor"></EdEditor>
+    <EdEditor :charts="charts"></EdEditor>
   </div>
 </template>
 
@@ -17,12 +17,14 @@
       EdHeader,
       EdEditor
     },
-    mounted(){
-      console.log('mounted')
+    data(){
+      return{
+        charts:[]
+      }
     },
     methods:{
       onAddChart(item){
-        this.$refs.editor.addChart(item)
+        this.charts.push(item)
       }
     }
   }

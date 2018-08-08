@@ -6,7 +6,6 @@
 
 
 <script type="text/javascript">
-  //import * as d3 from 'd3'
   import '../../../assets/style.css'
   import 'rivelajs/lib/rivela.min.css'
 
@@ -19,14 +18,44 @@
     created(){
       window.d3 = d3 // KEEP IT. hack way to make rivela work on vue-cli
     },
+    props:{
+      charts: Array
+    },
+    data(){
+      return{
+        icharts:[]
+      }
+    },
+    mounted(){
+      this.$watch('icharts', this.updateCharts, {deep:true})
+      this.icharts = this.charts
+    },
     methods:{
-      addChart(item){
-        var chart = rivela[item.method]()
-        var cnv = this.$el.querySelector('svg')
+      updateCharts(){
+        console.log('updateCharts', this.icharts)
 
-        d3.select(cnv)
-          .datum(item.data)
-          .call(chart)
+        var svg = this.$el.querySelector('svg')
+
+        var cha = d3.select(svg)
+          .selectAll('.rivela')
+          .data(this.icharts)
+        
+        var enterCharts = cha.enter()
+          .append('g')
+          .attr('class', (d, i) => `${d.method}_${i}`)
+
+        var exitCharts = cha.exit()
+          .remove('g')
+
+        cha.merge(enterCharts).merge(exitCharts).each(function(d, i) {
+          // eslint-disable-next-line
+          var chart = rivela[d.method]()
+          d3.select(this)
+            .attr('transform', `translate(${d.props.x}, ${d.props.y})`)
+            .datum(d.data)
+            .call(chart)
+        })
+
       }
     }
   }
