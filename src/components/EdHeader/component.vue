@@ -3,7 +3,9 @@
     <img src="../../assets/logo.png" />
 
     <ul>
-      <li v-for="item in menu" :key="item.label"><a href="" @click.prevent="addChart(item)">{{ item.label }}</a></li>
+      <li v-for="item in menu" :key="item.label">
+        <a href="" @click.prevent="addChart(item)">{{ item.label }}</a>
+      </li>
     </ul>
     
   </div>

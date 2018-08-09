@@ -1,7 +1,7 @@
 <template>
   <div id="editor">
-    <EdCanvas :charts="charts"></EdCanvas>
-    <EdSidebar v-show="showSidebar"></EdSidebar>
+    <EdCanvas ref="canvas" :charts="charts" @selected="onChartSelected"></EdCanvas>
+    <EdSidebar :chart="current" v-show="showSidebar"></EdSidebar>
   </div>
 </template>
 
@@ -13,11 +13,20 @@
 
   export default {
     props:{
-      charts:Array
+      charts:Array,
+      current:Object
     },
     data(){
       return{
         showSidebar:true
+      }
+    },
+    mounted(){
+      this.$watch('current', this.$refs.canvas.updateCharts, {deep:true})
+    },
+    methods:{
+      onChartSelected(item){
+        this.current = item
       }
     },
     components:{

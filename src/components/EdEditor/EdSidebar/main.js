@@ -7,6 +7,6 @@ import sample from './../../../sampledata.js'
 const CompTest = Vue.extend(Comp)
 new CompTest({
   propsData: {
-    charts: sample.charts
+    chart: sample.charts[0]
   }
 }).$mount('#app')

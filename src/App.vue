@@ -12,15 +12,14 @@
   import EdHeader from './components/EdHeader/component.vue'
   import EdEditor from './components/EdEditor/component.vue'
 
+
   export default {
     components:{
       EdHeader,
       EdEditor
     },
-    data(){
-      return{
-        charts:[]
-      }
+    props:{
+      charts:Array
     },
     methods:{
       onAddChart(item){
