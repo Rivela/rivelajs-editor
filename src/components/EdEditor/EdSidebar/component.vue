@@ -45,10 +45,11 @@
 
 <style type="text/css" scoped>
   .wrapper{
-    width: 200px;
-    min-width: 200px;
+    width: 300px;
+    min-width: 300px;
     height: 100%;
     background-color: #eee;
+    padding: 1rem;
   }
   .row{
     margin-bottom: 2rem;

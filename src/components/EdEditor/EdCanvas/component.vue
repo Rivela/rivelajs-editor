@@ -41,6 +41,8 @@
         var vm = this
         var svg = this.$el.querySelector('svg')
 
+        if(!vm.icharts) return
+
         var cha = d3.select(svg)
           .selectAll('.rivela')
           .data(vm.icharts, (d, i) => `${d.method}_${i}`)
@@ -87,7 +89,6 @@
   svg{
     width: 100%;
     height: 100%;
-    border:1px solid red;
   }
   svg text{
     pointer-events: none;

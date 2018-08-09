@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <EdHeader @addchart="onAddChart"></EdHeader>
-    <EdEditor :charts="charts"></EdEditor>
+    <EdEditor :charts="icharts"></EdEditor>
   </div>
 </template>
 
@@ -12,6 +12,7 @@
   import EdHeader from './components/EdHeader/component.vue'
   import EdEditor from './components/EdEditor/component.vue'
 
+  import sample from './sampledata.js'
 
   export default {
     components:{
@@ -21,9 +22,19 @@
     props:{
       charts:Array
     },
+    data(){
+      return{
+        icharts:sample.charts
+      }
+    },
     methods:{
       onAddChart(item){
-        this.charts.push(item)
+        var ob = {
+          method: 'barchart',
+          data: [2, 5, 3, 2, 5, 3, 2, 5, 3, 2, 5, 3, 2, 5, 3],
+          props: {x: 0, y: 400, width: 400, height: 200}
+        }
+        this.icharts.push(ob)
       }
     }
   }
@@ -31,7 +42,6 @@
 
 
 <style type="text/css">
-
   #app{
     width: 100%;
     height: 100%;
